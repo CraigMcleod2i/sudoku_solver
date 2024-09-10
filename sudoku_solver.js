@@ -1,10 +1,48 @@
-const basicGrid = [
-    [{notes: [1,2,3,4,5,6,7,8,9], area: 0, number: 1},{notes: [1,2,3,4,5,6,7,8,9], area: 0, number: null},{notes: [1,2,3,4,5,6,7,8,9], area: 1, number: null},{notes: [1,2,3,4,5,6,7,8,9], area: 1, number: 4}],
-    [{notes: [1,2,3,4,5,6,7,8,9], area: 0, number: 2},{notes: [1,2,3,4,5,6,7,8,9], area: 0, number: 3},{notes: [1,2,3,4,5,6,7,8,9], area: 1, number: 4},{notes: [1,2,3,4,5,6,7,8,9], area: 1, number: 1}],
-    [{notes: [1,2,3,4,5,6,7,8,9], area: 2, number: 3},{notes: [1,2,3,4,5,6,7,8,9], area: 2, number: 4},{notes: [1,2,3,4,5,6,7,8,9], area: 3, number: 1},{notes: [1,2,3,4,5,6,7,8,9], area: 3, number: 2}],
-    [{notes: [1,2,3,4,5,6,7,8,9], area: 2, number: 4},{notes: [1,2,3,4,5,6,7,8,9], area: 2, number: 1},{notes: [1,2,3,4,5,6,7,8,9], area: 3, number: 2},{notes: [1,2,3,4,5,6,7,8,9], area: 3, number: 3}]
-]
+function get_area(r, c) {
+	return 2 * Math.floor(r / 2) + Math.floor(c / 2);
+}
 
+class Cell {
+	constructor(r, c) {
+		this.r = r;
+		this.c = c;
+		this.a = get_area(r, c);
+		this.poss = [1, 2, 3, 4];
+		this.sol = null;
+	}
+}
 
+let cells = [];
 
-basicGrid.forEach(row => console.log(row.map(cell=> cell.number)))
+for (let i = 0; i < 4; i++) {
+	for (let j = 0; j < 4; j++) {
+		cells.push(new Cell(i, j, 0));
+	}
+}
+
+console.log(cells[0]);
+
+challenge = [
+	[0, 1, 3],
+	[0, 2, 4],
+	[1, 0, 4],
+	[1, 3, 2],
+	[2, 0, 1],
+	[2, 3, 3],
+	[3, 1, 2],
+	[3, 2, 1],
+];
+
+for (s = 0; s < challenge.length; s++) {
+	for (let cell = 0; s < cells.length; cell++) {
+		if (cell.r == s[0]) {
+			if (cell.c == s[1]) {
+				cell.poss = [];
+				cell.sol = s[2];
+				break;
+			}
+		}
+	}
+}
+
+console.log(cells[3]);
